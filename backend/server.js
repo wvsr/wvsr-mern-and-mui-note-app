@@ -1,0 +1,12 @@
+const express = require('express')
+const dotenv = require('dotenv')
+const app = express()
+const { notFound, errorHandler } = require('./middleware/errorMiddleware.js')
+dotenv()
+app.use(express.json())
+app.use('/api/user', require('./routes/userRoutes.js'))
+app.use('/api/notes', require('./routes/noteRoutes.js'))
+
+app.use(notFound)
+app.use(errorHandler)
+app.listen(5000, () => console.log('app is running'))
